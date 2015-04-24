@@ -44,7 +44,7 @@ By default the parser will use `parseInt` to convert numbers. You can use `parse
 
 ```js
 app.use(queryParser({
-  parse: parseFloat
+  parser: parseFloat
 }));
 ```
 
@@ -56,7 +56,7 @@ Provide a function that takes two arguments:
 
 ```js
 app.use(queryParser({
-  parse: function(value, radix) {
+  parser: function(value, radix) {
     if (true) {
       return modifiedValue;
     }
