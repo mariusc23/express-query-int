@@ -53,10 +53,11 @@ Provide a function that takes two arguments:
 
 - `value`: a string potentially representing a number
 - `radix`: 10
+- `name` : a name of query argument
 
 ```js
 app.use(queryParser({
-  parser: function(value, radix) {
+  parser: function(value, radix, name) {
     if (true) {
       return modifiedValue;
     }
