@@ -24,12 +24,8 @@ var parser = require('../lib/parse');
 
 exports.parser = {
   setUp: function(done) {
-    this.intOptions = {
-      parser: parseInt
-    };
-
-    this.floatOptions = {
-      parser: parseFloat
+    this.defaultOptions = {
+      parser: Number
     };
 
     done();
@@ -39,7 +35,7 @@ exports.parser = {
     test.deepEqual(
       parser({
         a: '8'
-      }, this.intOptions),
+      }, this.defaultOptions),
       {
         a: 8
       },
@@ -53,7 +49,7 @@ exports.parser = {
     test.deepEqual(
       parser({
         a: '08'
-      }, this.intOptions),
+      }, this.defaultOptions),
       {
         a: 8
       },
@@ -67,7 +63,7 @@ exports.parser = {
     test.deepEqual(
       parser({
         a: '0.8'
-      }, this.floatOptions),
+      }, this.defaultOptions),
       {
         a: 0.8
       },
@@ -83,7 +79,7 @@ exports.parser = {
         a: {
           b: '8'
         }
-      }, this.intOptions),
+      }, this.defaultOptions),
       {
         a: {
           b: 8
@@ -99,11 +95,31 @@ exports.parser = {
     test.deepEqual(
       parser({
         a: 'string'
-      }, this.intOptions),
+      }, this.defaultOptions),
       {
         a: 'string'
       },
       'Should not convert regular string.'
+    );
+
+    test.deepEqual(
+      parser({
+        a: '10.0.0.1'
+      }, this.defaultOptions),
+      {
+        a: '10.0.0.1'
+      },
+      'Should not convert IP string.'
+    );
+
+    test.deepEqual(
+      parser({
+        a: '106e04cf-344b-4c1c-98a0-002a67df7099'
+      }, this.defaultOptions),
+      {
+        a: '106e04cf-344b-4c1c-98a0-002a67df7099'
+      },
+      'Should not convert UUID string.'
     );
 
     test.done();

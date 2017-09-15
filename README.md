@@ -39,8 +39,8 @@ console.log(req.query);
 // => { a: 4, b: { c: 2 } }
 ```
 
-### Floating Point
-By default the parser will use `parseInt` to convert numbers. You can use `parseFloat` or your own function.
+### Default Parser
+By default the parser will use `Number` to convert numbers. You can use `parseInt`, `parseFloat`, or your own function.
 
 ```js
 app.use(queryParser({
