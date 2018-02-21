@@ -91,6 +91,30 @@ exports.parser = {
     test.done();
   },
 
+  array: function(test) {
+    test.deepEqual(
+      parser(['8'], this.defaultOptions),
+      [8],
+      'Should convert array items.'
+    );
+
+    test.done();
+  },
+
+  deepArray: function(test) {
+    test.deepEqual(
+      parser({
+        a: ['8', ['9'], { a: '7' }],
+      }, this.defaultOptions),
+      {
+        a: [8, [9], { a: 7 }],
+      },
+      'Should convert arrays recursively.'
+    );
+
+    test.done();
+  },
+
   string: function(test) {
     test.deepEqual(
       parser({
